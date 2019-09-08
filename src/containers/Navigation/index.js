@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import * as S from './styles';
 import useKeyPress from '../../hooks/use-key-press';
 import key from '../../constants/keys-map';
 import NavList from '../../components/NavList';
@@ -38,7 +39,9 @@ function Navigation({ isFocused, setFocusedSection }) {
   }, [rightPress, isFocused, setFocusedSection]);
 
   return (
-    <NavList isFocused={isFocused} items={items} focusedIndex={focusedIndex} />
+    <S.Navigation isFocused={isFocused}>
+      <NavList isFocused={isFocused} items={items} focusedIndex={focusedIndex} />
+    </S.Navigation>
   );
 }
 

@@ -5,19 +5,17 @@ import * as S from './styles';
 
 function NavList({ isFocused, items, focusedIndex }) {
   return (
-    <S.Wrapper isFocused={isFocused}>
-      <S.List>
-        {items.map((item, index) => {
-          const focusedItem = focusedIndex === index && isFocused;
-          return (
-            <S.Item key={item.text} focusedItem={focusedItem}>
-              <S.StyledIcon name={item.icon} focusedItem={focusedItem} />
-              {item.text}
-            </S.Item>
-          );
-        })}
-      </S.List>
-    </S.Wrapper>
+    <S.List>
+      {items.map((item, index) => {
+        const focusedItem = focusedIndex === index && isFocused;
+        return (
+          <S.Item key={item.text} focusedItem={focusedItem}>
+            <S.StyledIcon name={item.icon} focusedItem={focusedItem} />
+            {item.text}
+          </S.Item>
+        );
+      })}
+    </S.List>
   );
 }
 

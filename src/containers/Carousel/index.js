@@ -65,6 +65,12 @@ function Carousel({ isFocused, setFocusedSection }) {
         backgroundImage={`assets/images/${items[focusedItem].image}-background.jpg`}
       />
 
+      <S.StyledInfoContent
+        isFocused={isFocused}
+        title={items[focusedItem].title}
+        description={items[focusedItem].description}
+      />
+
       <S.List focusedItem={focusedItem} isFocused={isFocused}>
         {items.map((item) => (
           <S.Item key={item}>

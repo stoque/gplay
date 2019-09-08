@@ -5,6 +5,13 @@ import * as S from './styles';
 import useKeyPress from '../../hooks/use-key-press';
 import key from '../../constants/keys-map';
 import Button from '../../components/Button';
+import InfoContent from '../../components/InfoContent';
+
+const highlight = {
+  title: "The Handmaid's Tale",
+  description: 'Gilead tem um regime que trata mulheres como propriedade. Offred é uma das poucas mulheres férteis e serva do Comandante, buscando sobreviver e encontrar a filha que foi tirada dela.',
+  background: 'highlight-banner.jpg',
+};
 
 function Highlight({ isFocused, setFocusedSection }) {
   const upPress = useKeyPress(key.UP);
@@ -47,16 +54,12 @@ function Highlight({ isFocused, setFocusedSection }) {
 
   return (
     <S.Highlight isFocused={isFocused}>
-      <S.Background />
-      <S.Title>
-        The Handmaid's Tale
-      </S.Title>
+      <S.Background background={`assets/images/${highlight.background}`} />
 
-      <S.Description>
-        Gilead tem um regime que trata mulheres como propriedade.
-        Offred é uma das poucas mulheres férteis e serva do Comandante,
-        buscando sobreviver e encontrar a filha que foi tirada dela.
-      </S.Description>
+      <InfoContent
+        title={highlight.title}
+        description={highlight.description}
+      />
 
       <S.Actions>
         <Button focused={activeButton === 1}>
