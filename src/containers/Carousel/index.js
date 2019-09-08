@@ -1,22 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import * as S from './styles';
 import useKeyPress from '../../hooks/use-key-press';
 import key from '../../constants/keys-map';
 
 const items = [
-  { text: 'BBB' },
-  { text: 'BBB' },
-  { text: 'BBB' },
-  { text: 'BBB' },
-  { text: 'BBB' },
+  {
+    title: 'The Good Doctor - O Bom Doutor',
+    description: 'Um jovem médico com autismo começa a trabalhar em um famoso hospital. Além dos desafios da profissão, ele terá também que provar sua capacidade a seus colegas e superiores.',
+    image: 'good-doctor',
+  },
+  {
+    title: 'Ice',
+    description: 'Uma família dona de empresa de diamantes em Los Angeles se vê em apuros quando um dos herdeiros mata um traficante do ramo, fica em perigo e coloca em risco o próprio negócio.',
+    image: 'ice',
+  },
+  {
+    title: 'The Good Doctor - O Bom Doutor',
+    description: 'Um jovem médico com autismo começa a trabalhar em um famoso hospital. Além dos desafios da profissão, ele terá também que provar sua capacidade a seus colegas e superiores.',
+    image: 'good-doctor',
+  },
+  {
+    title: 'Ice',
+    description: 'Uma família dona de empresa de diamantes em Los Angeles se vê em apuros quando um dos herdeiros mata um traficante do ramo, fica em perigo e coloca em risco o próprio negócio.',
+    image: 'ice',
+  },
 ];
 
 function Carousel({ isFocused, setFocusedSection }) {
   const upPress = useKeyPress(key.UP);
   const rightPress = useKeyPress(key.RIGHT);
   const leftPress = useKeyPress(key.LEFT);
-  const [focusedIndex, setFocusedIndex] = useState(0);
+  const [focusedItem, setFocusedItem] = useState(0);
 
   useEffect(() => {
     if (isFocused && upPress) {
@@ -26,7 +42,7 @@ function Carousel({ isFocused, setFocusedSection }) {
 
   useEffect(() => {
     if (isFocused && leftPress) {
-      setFocusedIndex((i) => {
+      setFocusedItem((i) => {
         if (i === 0) {
           setFocusedSection('navigation');
           return i;
@@ -38,20 +54,25 @@ function Carousel({ isFocused, setFocusedSection }) {
 
   useEffect(() => {
     if (isFocused && rightPress) {
-      setFocusedIndex((i) => (i < items.length - 1 ? i + 1 : i));
+      setFocusedItem((i) => (i < items.length - 1 ? i + 1 : i));
     }
   }, [rightPress, isFocused]);
 
   return (
-    <div className={isFocused ? 'focused' : ''}>
-      <ul style={{ display: 'flex' }}>
-        {items.map((item, index) => (
-          <li key={index} className={focusedIndex === index ? 'focused' : ''}>
-            {item.text}
-          </li>
+    <S.Carousel isFocused={isFocused}>
+      <S.Background
+        isFocused={isFocused}
+        backgroundImage={`assets/images/${items[focusedItem].image}-background.jpg`}
+      />
+
+      <S.List focusedItem={focusedItem} isFocused={isFocused}>
+        {items.map((item) => (
+          <S.Item key={item}>
+            <S.Image src={`assets/images/${item.image}-thumb.jpg`} />
+          </S.Item>
         ))}
-      </ul>
-    </div>
+      </S.List>
+    </S.Carousel>
   );
 }
 

@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import * as S from './styles';
 import useKeyPress from '../../hooks/use-key-press';
 import key from '../../constants/keys-map';
+import Button from '../../components/Button';
 
 function Highlight({ isFocused, setFocusedSection }) {
+  const upPress = useKeyPress(key.UP);
   const downPress = useKeyPress(key.DOWN);
   const rightPress = useKeyPress(key.RIGHT);
   const leftPress = useKeyPress(key.LEFT);
-  const [activeButton, setActiveButton] = useState(0);
+  const [activeButton, setActiveButton] = useState(1);
 
   useEffect(() => {
     if (isFocused && rightPress) {
@@ -20,6 +23,7 @@ function Highlight({ isFocused, setFocusedSection }) {
     if (isFocused && leftPress) {
       setActiveButton((button) => {
         if (button === 1) {
+          setActiveButton(0);
           setFocusedSection('navigation');
           return button;
         }
@@ -30,16 +34,39 @@ function Highlight({ isFocused, setFocusedSection }) {
 
   useEffect(() => {
     if (isFocused && downPress) {
+      setActiveButton(0);
       setFocusedSection('carousel');
     }
   }, [downPress, isFocused, setFocusedSection]);
 
+  useEffect(() => {
+    if (isFocused && upPress) {
+      setActiveButton(1);
+    }
+  }, [upPress, isFocused]);
+
   return (
-    <div className={isFocused ? 'focused' : ''}>
-      <h1>Highlight</h1>
-      <button type="button" className={activeButton === 1 ? 'focused' : ''}>Assista</button>
-      <button type="button" className={activeButton === 2 ? 'focused' : ''}>Veja Mais</button>
-    </div>
+    <S.Highlight isFocused={isFocused}>
+      <S.Background />
+      <S.Title>
+        The Handmaid's Tale
+      </S.Title>
+
+      <S.Description>
+        Gilead tem um regime que trata mulheres como propriedade.
+        Offred é uma das poucas mulheres férteis e serva do Comandante,
+        buscando sobreviver e encontrar a filha que foi tirada dela.
+      </S.Description>
+
+      <S.Actions>
+        <Button focused={activeButton === 1}>
+          Assista
+        </Button>
+        <Button focused={activeButton === 2}>
+          Veja mais
+        </Button>
+      </S.Actions>
+    </S.Highlight>
   );
 }
 

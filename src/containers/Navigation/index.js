@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 import useKeyPress from '../../hooks/use-key-press';
 import key from '../../constants/keys-map';
+import NavList from '../../components/NavList';
 
 const items = [
-  { text: 'Busca' },
-  { text: 'Início' },
-  { text: 'Agora na Globo' },
-  { text: 'Categorias' },
-  { text: 'Minha Conta' },
+  { text: 'Busca', icon: 'search' },
+  { text: 'Início', icon: 'home' },
+  { text: 'Agora na Globo', icon: 'live' },
+  { text: 'Categorias', icon: 'categories' },
+  { text: 'Minha Conta', icon: 'user' },
 ];
 
 function Navigation({ isFocused, setFocusedSection }) {
@@ -37,15 +38,7 @@ function Navigation({ isFocused, setFocusedSection }) {
   }, [rightPress, isFocused, setFocusedSection]);
 
   return (
-    <div className={isFocused ? 'focused' : ''}>
-      <ul>
-        {items.map((item, index) => (
-          <li key={item.text} className={focusedIndex === index ? 'focused' : ''}>
-            {item.text}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <NavList isFocused={isFocused} items={items} focusedIndex={focusedIndex} />
   );
 }
 

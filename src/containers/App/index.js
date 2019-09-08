@@ -4,12 +4,17 @@ import Navigation from '../Navigation';
 import Carousel from '../Carousel';
 import Highlight from '../Highlight';
 
+import Svgs from '../../components/Svgs';
+
+import GlobalStyle from '../../styles/global';
+
 function App() {
-  const [focusedSection, setFocusedSection] = useState('navigation');
+  const [focusedSection, setFocusedSection] = useState('highlight');
 
   return (
     <div>
-      <h1>Globoplay</h1>
+      <GlobalStyle />
+      <Svgs />
 
       <Navigation
         isFocused={focusedSection === 'navigation'}
