@@ -3,26 +3,26 @@ import { useState, useEffect, useCallback } from 'react';
 export default function useKeyPress(targetKey) {
   const [keyPressed, setKeyPressed] = useState(false);
 
-  const downHandler = useCallback(({ keyCode }) => {
+  const keyDownHandler = useCallback(({ keyCode }) => {
     if (keyCode === targetKey) {
       setKeyPressed(true);
     }
   }, [targetKey]);
 
-  const upHandler = useCallback(({ keyCode }) => {
+  const keyUpHandler = useCallback(({ keyCode }) => {
     if (keyCode === targetKey) {
       setKeyPressed(false);
     }
   }, [targetKey]);
 
   useEffect(() => {
-    window.addEventListener('keydown', downHandler);
-    window.addEventListener('keyup', upHandler);
+    window.addEventListener('keydown', keyDownHandler);
+    window.addEventListener('keyup', keyUpHandler);
     return () => {
-      window.removeEventListener('keydown', downHandler);
-      window.removeEventListener('keyup', upHandler);
+      window.removeEventListener('keydown', keyDownHandler);
+      window.removeEventListener('keyup', keyUpHandler);
     };
-  }, [downHandler, upHandler]);
+  }, [keyDownHandler, keyUpHandler]);
 
   return keyPressed;
 }
