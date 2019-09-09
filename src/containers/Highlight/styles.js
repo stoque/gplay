@@ -4,7 +4,7 @@ export const Highlight = styled.div`
   margin-left: 80px;
   padding: 100px;
   position: relative;
-  z-index: ${(props) => (props.isFocused ? '2' : '0')};
+  z-index: 1;
 `;
 
 export const Background = styled.div`
@@ -13,7 +13,7 @@ export const Background = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  height: 520px;
+  height: 640px;
   width: 100%;
   z-index: -1;
 

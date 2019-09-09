@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import * as S from './styles';
 import useKeyPress from '../../hooks/use-key-press';
 import key from '../../constants/keys-map';
+import CarouselList from '../../components/CarouselList';
 
 const items = [
   {
@@ -71,13 +72,11 @@ function Carousel({ isFocused, setFocusedSection }) {
         description={items[focusedItem].description}
       />
 
-      <S.List focusedItem={focusedItem} isFocused={isFocused}>
-        {items.map((item) => (
-          <S.Item key={item}>
-            <S.Image src={`assets/images/${item.image}-thumb.jpg`} />
-          </S.Item>
-        ))}
-      </S.List>
+      <CarouselList
+        isFocused={isFocused}
+        focusedItem={focusedItem}
+        items={items}
+      />
     </S.Carousel>
   );
 }
