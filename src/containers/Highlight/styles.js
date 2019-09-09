@@ -22,7 +22,7 @@ export const Background = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(0deg ,#000 ,rgba(0,0,0,.5) 10%, rgba(0,0,0,.1) 57%);
+    background: linear-gradient(0deg ,#000 ,rgba(0,0,0,.5) 24%, rgba(0,0,0,.1) 57%);
     bottom: 0;
   }
 `;
